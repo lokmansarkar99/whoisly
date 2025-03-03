@@ -5,6 +5,8 @@ import { FaSync } from "react-icons/fa"; // For the refresh icon
 import Loader from "../components/Loader";
 
 function WhoisDetail() {
+
+
     const { domain } = useParams();
     const navigate = useNavigate(); // Hook to handle redirection
     const [data, setData] = useState(null);
@@ -12,16 +14,19 @@ function WhoisDetail() {
     const [error, setError] = useState("");
 
     const fetchWhoisData = async () => {
+        const API_URL = import.meta.env.VITE_API_URL;
+        const API_KEY = import.meta.env.VITE_API_KEY;
+        const API_HOST = import.meta.env.VITE_API_HOST;
         setLoading(true);
         setError("");
         try {
             const options = {
                 method: 'GET',
-                url: `https://domains-api.p.rapidapi.com/domains/${domain}/whois`,
+                url: `${API_URL}/${domain}/whois`,
                 params: { follow: '1', raw: 'false' },
                 headers: {
-                    'x-rapidapi-key': '71c8ecf161msh54666a03a28f32ep1c6416jsn5d23ba30e9d7',
-                    'x-rapidapi-host': 'domains-api.p.rapidapi.com'
+                    'x-rapidapi-key': API_KEY,
+                    'x-rapidapi-host': API_HOST
                 }
             };
 
